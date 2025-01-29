@@ -46,11 +46,8 @@ export abstract class BaseController<T, S extends BaseService<T>> {
   getAll = (req: Request, res: Response) => {
     const userType: UserType = (req.body.user as User).type;
 
-    const userId =
-      userType === UserType.ACADEMY || userType === UserType.TEACHER ? (req.body.user as User)._id : undefined;
-
     this.service
-      .getAlls(userId)
+      .getAlls()
       .then(data => res.status(HTTP_STATUS.OK).json(data))
       .catch(error => handleError(error, res));
   };
